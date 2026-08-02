@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Contract Data Extraction API — Audit Key Clauses Automatically</title>
+<meta name='description' content='Automate contract review. Extract parties, effective dates, renewal terms, payment terms, and key clauses from contracts into JSON. Free tier, developer-first.'>
+<link rel='canonical' href='https://docstruct.pages.dev/contract-key-clauses-extraction/'>
+<meta property='og:title' content='Contract Data Extraction API — Audit Key Clauses Automatically'>
+<meta property='og:description' content='Automate contract review. Extract parties, effective dates, renewal terms, payment terms, and key clauses from contracts into JSON. Free tier, developer-first.'>
+<link rel='icon' href='data:,favicon'>
+<link rel='stylesheet' href='/site.css'>
+</head><body>
+<nav><div class='logo'>Doc<span>Struct</span></div><div><a href='https://docstruct.pages.dev/'>Home</a><a href='https://docstruct.pages.dev/#pricing'>Pricing</a><a href='https://docstruct.pages.dev/#docs'>Docs</a><a href='https://github.com/marwannaili237/docstruct'>GitHub</a></div></nav>
+<section class='seo-hero'><h1>Extract parties, dates &amp; key clauses from contracts as structured data</h1>
+<p>Automate contract review. Extract parties, effective dates, renewal terms, payment terms, and key clauses from contracts into JSON. Free tier, developer-first.</p><a class='btn' href='https://docstruct.pages.dev/#demo'>Try live demo</a> <a class='btn secondary' href='https://docstruct.pages.dev/#docs'>View docs</a></section>
+<section class='seo-sec'><h2>Why automate contract review</h2><p>Legal teams, founders, and procurement specialists review endless contracts for these fields: parties, effective and expiration dates, renewal terms, payment terms, and unusual key clauses. Reading the full text manually is slow, and a missed auto-renewal clause can be costly. A contract data extraction API surfaces the critical fields in seconds as structured JSON.</p></section>
+<section class='seo-sec'><h2>How it works</h2><p>Send the contract text to the extraction endpoint with type &quot;contract&quot;. DocStruct returns: parties, effective/expiration dates, renewal terms, payment terms, key clauses (title + text), signature requirements, and jurisdiction. Tag contracts by vendor, expiry, or risk and integrate into your contract lifecycle management (CLM) pipeline.</p></section>
+<section class='seo-sec'><h2>Sample response</h2><pre class='code'>{
+  &quot;ok&quot;: true,
+  &quot;data&quot;: { ... }
+}</pre></section>
+<section class='seo-sec'><h2>Start free</h2><p>Grab the free tier to test with your own contracts today. No credit card, up to 20 extractions per day.</p></section>
+<section class='seo-sec'><h2>Quick start</h2><pre class='code'><code>POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract
+Content-Type: application/json
+
+{&quot;text&quot;: &quot;&lt;paste invoice/statement/receipt/contract text&gt;&quot;, &quot;type&quot;: &quot;contract&quot;, &quot;output&quot;: &quot;json&quot;}
+→ {&quot;ok&quot;: true, &quot;data&quot;: { ... structured fields ... }}</code></pre></section>
+</body></html>

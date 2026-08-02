@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Invoice Data Extraction API — Turn Invoices into JSON/CSV</title>
+<meta name='description' content='Automate bookkeeping. DocStruct&#x27;s invoice data extraction API turns messy invoice text into clean structured JSON/CSV — vendor, line items, totals, dates. Free tier, no credit card.'>
+<link rel='canonical' href='https://docstruct.pages.dev/invoice-data-extraction-api/'>
+<meta property='og:title' content='Invoice Data Extraction API — Turn Invoices into JSON/CSV'>
+<meta property='og:description' content='Automate bookkeeping. DocStruct&#x27;s invoice data extraction API turns messy invoice text into clean structured JSON/CSV — vendor, line items, totals, dates. Free tier, no credit card.'>
+<link rel='icon' href='data:,favicon'>
+<link rel='stylesheet' href='/site.css'>
+</head><body>
+<nav><div class='logo'>Doc<span>Struct</span></div><div><a href='https://docstruct.pages.dev/'>Home</a><a href='https://docstruct.pages.dev/#pricing'>Pricing</a><a href='https://docstruct.pages.dev/#docs'>Docs</a><a href='https://github.com/marwannaili237/docstruct'>GitHub</a></div></nav>
+<section class='seo-hero'><h1>Extract invoice line items, totals &amp; dates into JSON with one API call</h1>
+<p>Automate bookkeeping. DocStruct&#x27;s invoice data extraction API turns messy invoice text into clean structured JSON/CSV — vendor, line items, totals, dates. Free tier, no credit card.</p><a class='btn' href='https://docstruct.pages.dev/#demo'>Try live demo</a> <a class='btn secondary' href='https://docstruct.pages.dev/#docs'>View docs</a></section>
+<section class='seo-sec'><h2>Why automate invoice data entry</h2><p>Bookkeepers and e-commerce sellers lose hours manually retyping invoice line items, totals, and due dates into spreadsheets and accounting software. An invoice data extraction API reads the document and returns structured JSON you can insert into QuickBooks, Xero, your database, or a CSV for free. No templates, no training, no human review.</p></section>
+<section class='seo-sec'><h2>How it works</h2><p>Send the raw invoice text (extracted from the PDF or copy/pasted) to the invoice extraction endpoint. In a few seconds you get back a clean object: vendor name and address, invoice number, issue and due dates, currency, every line item with quantity/unit price/line total, subtotal, tax, discount, and total. Handle batches, emails, and supplier attachments the same way.</p></section>
+<section class='seo-sec'><h2>Sample response</h2><pre class='code'>{
+  &quot;ok&quot;: true,
+  &quot;data&quot;: { ... }
+}</pre></section>
+<section class='seo-sec'><h2>Get started</h2><p>It&#x27;s free for up to 20 extractions a day with no credit card. Send a POST request to /v1/extract with the invoice text and type &quot;invoice&quot;. Parse the JSON straight into your stack.</p></section>
+<section class='seo-sec'><h2>Quick start</h2><pre class='code'><code>POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract
+Content-Type: application/json
+
+{&quot;text&quot;: &quot;&lt;paste invoice/statement/receipt/contract text&gt;&quot;, &quot;type&quot;: &quot;invoice&quot;, &quot;output&quot;: &quot;json&quot;}
+→ {&quot;ok&quot;: true, &quot;data&quot;: { ... structured fields ... }}</code></pre></section>
+</body></html>

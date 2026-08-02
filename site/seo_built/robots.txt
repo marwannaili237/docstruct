@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://docstruct.pages.dev/sitemap.xml

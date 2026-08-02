@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Bank Statement Parser API — Extract Transactions to CSV/JSON</title>
+<meta name='description' content='Automate accounting &amp; reconciliation. Parse bank statement text into structured transactions with dates, descriptions, amounts, and balances. Free tier, developer-friendly, Cloudflare edge.'>
+<link rel='canonical' href='https://docstruct.pages.dev/bank-statement-parser-api/'>
+<meta property='og:title' content='Bank Statement Parser API — Extract Transactions to CSV/JSON'>
+<meta property='og:description' content='Automate accounting &amp; reconciliation. Parse bank statement text into structured transactions with dates, descriptions, amounts, and balances. Free tier, developer-friendly, Cloudflare edge.'>
+<link rel='icon' href='data:,favicon'>
+<link rel='stylesheet' href='/site.css'>
+</head><body>
+<nav><div class='logo'>Doc<span>Struct</span></div><div><a href='https://docstruct.pages.dev/'>Home</a><a href='https://docstruct.pages.dev/#pricing'>Pricing</a><a href='https://docstruct.pages.dev/#docs'>Docs</a><a href='https://github.com/marwannaili237/docstruct'>GitHub</a></div></nav>
+<section class='seo-hero'><h1>Parse bank statements into clean transactions (JSON/CSV) automatically</h1>
+<p>Automate accounting &amp; reconciliation. Parse bank statement text into structured transactions with dates, descriptions, amounts, and balances. Free tier, developer-friendly, Cloudflare edge.</p><a class='btn' href='https://docstruct.pages.dev/#demo'>Try live demo</a> <a class='btn secondary' href='https://docstruct.pages.dev/#docs'>View docs</a></section>
+<section class='seo-sec'><h2>Why parse bank statements with an API</h2><p>Loan underwriting, accounting reconciliation, and expense categorization all need clean transaction data from PDF bank statements. Copy-pasting is error-prone and slow. A bank statement parser API turns the statement text into structured transactions — date, description, amount, running balance — plus opening/closing balances and a summary of deposits and withdrawals.</p></section>
+<section class='seo-sec'><h2>How it works</h2><p>Send the statement text (from the PDF or scanned document OCR) to the statement extraction endpoint. DocStruct returns an account-level object: account holder, account number, bank, period start/end, opening and closing balances, and a transactions array. Export as CSV to drop straight into Excel, Google Sheets, or your reconciliation pipeline.</p></section>
+<section class='seo-sec'><h2>Sample response</h2><pre class='code'>{
+  &quot;ok&quot;: true,
+  &quot;data&quot;: { ... }
+}</pre></section>
+<section class='seo-sec'><h2>Integrate in minutes</h2><p>Free tier included. Call /v1/extract with type &quot;statement&quot;. Build automated reconciliation, loan file processing, or spending analytics without manual data entry.</p></section>
+<section class='seo-sec'><h2>Quick start</h2><pre class='code'><code>POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract
+Content-Type: application/json
+
+{&quot;text&quot;: &quot;&lt;paste invoice/statement/receipt/contract text&gt;&quot;, &quot;type&quot;: &quot;statement&quot;, &quot;output&quot;: &quot;json&quot;}
+→ {&quot;ok&quot;: true, &quot;data&quot;: { ... structured fields ... }}</code></pre></section>
+</body></html>

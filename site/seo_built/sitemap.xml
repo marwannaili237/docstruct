@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://docstruct.pages.dev/</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://docstruct.pages.dev/invoice-data-extraction-api/</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://docstruct.pages.dev/bank-statement-parser-api/</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://docstruct.pages.dev/receipt-ocr-api/</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://docstruct.pages.dev/contract-key-clauses-extraction/</loc><changefreq>weekly</changefreq></url>
+</urlset>

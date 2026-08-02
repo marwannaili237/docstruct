@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocStruct — Turn messy documents into structured data. In seconds.</title>
+<meta name="description" content="DocStruct API extracts structured data (invoices, receipts, bank statements, contracts) from raw document text into clean JSON/CSV. Free tier, developer-first, runs on the Cloudflare edge.">
+<meta property="og:title" content="DocStruct — Structured data from messy documents">
+<meta property="og:description" content="One API call turns invoices, receipts, and statements into clean JSON/CSV. Free tier. Developer-first.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://docstruct.pages.dev/">
+<style>
+  :root{--bg:#0b1120;--card:#111a2e;--ink:#e6edf7;--muted:#93a1bd;--accent:#38bdf8;--accent2:#818cf8;--good:#4ade80;--bad:#f87171;--border:#1f2a44}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1160px;margin:0 auto}
+  .logo{font-weight:700;font-size:1.25rem;letter-spacing:-.02em}
+  .logo span{color:var(--accent)}
+  nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:.95rem}
+  nav a:hover{color:var(--ink)}
+  .btn{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04101f;font-weight:700;padding:12px 26px;border-radius:10px;text-decoration:none;border:none;cursor:pointer;font-size:1rem}
+  .btn.secondary{background:transparent;color:var(--accent);border:1px solid var(--border)}
+  .btn.sm{padding:8px 16px;font-size:.9rem}
+  .hero{text-align:center;padding:70px 24px 50px}
+  .hero h1{font-size:2.9rem;line-height:1.1;font-weight:800;letter-spacing:-.03em;max-width:800px;margin:0 auto}
+  .hero h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);font-size:1.2rem;max-width:640px;margin:20px auto 30px}
+  .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .hero .badge{display:inline-block;background:rgba(56,189,248,.12);color:var(--accent);border:1px solid rgba(56,189,248,.25);padding:6px 14px;border-radius:999px;font-size:.85rem;margin-bottom:18px}
+  .demo{max-width:1080px;margin:0 auto;padding:0 24px 20px}
+  .deco{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .deco-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center;font-size:.85rem;color:var(--muted)}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+  .deco-body{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.deco-body{grid-template-columns:1fr}.hero h1{font-size:2.1rem}}
+  .panel h3{font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px}
+  textarea{width:100%;min-height:220px;background:#0a1120;border:1px solid var(--border);border-radius:10px;color:var(--ink);padding:14px;font-family:ui-monospace,Menlo,monospace;font-size:.85rem;resize:vertical}
+  textarea:focus{outline:none;border-color:var(--accent)}
+  pre{background:#0a1120;border:1px solid var(--border);border-radius:10px;padding:14px;font-family:ui-monospace,Menlo,monospace;font-size:.82rem;min-height:220px;max-height:400px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+  .bar{display:flex;gap:8px;margin-top:12px;align-items:center}
+  .bar select,.bar button{flex:0 0 auto}
+  select{background:#0a1120;border:1px solid var(--border);color:var(--ink);padding:9px 12px;border-radius:8px}
+  .status{font-size:.85rem;color:var(--muted)}
+  .status.ok{color:var(--good)}.status.err{color:var(--bad)}
+  .features{padding:60px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:1080px;margin:0 auto}
+  .feat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+  .feat h3{font-size:1.05rem;margin-bottom:8px;color:var(--accent)}
+  .feat p{color:var(--muted);font-size:.95rem}
+  .pricing{padding:50px 24px;max-width:1080px;margin:0 auto}
+  .pricing h2{text-align:center;font-size:2rem;margin-bottom:10px}
+  .pricing>p{text-align:center;color:var(--muted);margin-bottom:34px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center}
+  .card.pop{position:relative;border-color:var(--accent)}
+  .card.pop .lbl{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#04101f;font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:999px}
+  .card .price{font-size:2.4rem;font-weight:800}
+  .card .price small{font-size:1rem;font-weight:400;color:var(--muted)}
+  .card ul{list-style:none;margin:18px 0 22px;text-align:left;font-size:.92rem;color:var(--muted)}
+  .card li{padding:6px 0;border-bottom:1px solid var(--border)}
+  .card li::before{content:"✓ ";color:var(--good)}
+  .card .btn{width:100%}
+  footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border);margin-top:40px}
+  .code-tag{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);border-radius:7px;padding:2px 7px;font-family:ui-monospace,Menlo,monospace;font-size:.85em;color:var(--accent)}
+  .sect-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1080px;margin:40px auto 0;padding:0 24px}
+  @media(max-width:760px){.sect-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Doc<span>Struct</span></div>
+  <div>
+    <a href="#demo">Live demo</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#docs">Docs</a>
+    <a href="https://github.com/marwannaili237/docstruct" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <span class="badge">AI-powered · Cloudflare edge · Developer-first</span>
+  <h1>Turn messy documents into <span class="grad">structured data</span> in seconds</h1>
+  <p>Invoices, receipts, bank statements, contracts — one API call turns them into clean JSON or CSV. Stop typing data by hand. Free to start.</p>
+  <div class="cta">
+    <a class="btn" href="#demo">Try the live demo</a>
+    <a class="btn secondary" href="#pricing">View pricing</a>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="deco">
+    <div class="deco-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:10px">/v1/extract</span></div>
+    <div class="deco-body">
+      <div class="panel">
+        <h3>Paste a document</h3>
+        <textarea id="input" spellcheck="false">Harbor Trading
+INVOICE # INV-2026-1901
+Date: 08/02/2026   Due: 08/16/2026
+Bill To: Northwind LLC
+------------------------------------------------
+1  Widget Assembly (Serial A-4412)      $250.00
+2  Shipping & Handling                  $ 45.00
+------------------------------------------------
+SUBTOTAL   $295.00
+TAX (0%)     $0.00
+TOTAL     $295.00  USD</textarea>
+        <div class="bar">
+          <select id="type">
+            <option value="auto">type: auto</option>
+            <option value="invoice">type: invoice</option>
+            <option value="receipt">type: receipt</option>
+            <option value="statement">type: statement</option>
+            <option value="contract">type: contract</option>
+          </select>
+          <button class="btn sm" id="run">Extract →</button>
+          <span class="status" id="status"></span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Structured JSON</h3>
+        <pre id="out">{ "type": "invoice", ... } — paste a document and click Extract</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sect-grid">
+  <div class="feat"><h3>⏱ No more manual data entry</h3><p>Bookkeepers, e-commerce sellers, and accountants turn hours of typing into seconds with a single API call.</p></div>
+  <div class="feat"><h3>🧼 Always-valid schema</h3><p>Clean JSON per document type. No surprises, no markdown, no hallucinations in the output. Just data.</p></div>
+  <div class="feat"><h3>🛰️ Global edge, low latency</h3><p>Runs on Cloudflare Workers in 300+ cities. Fast from anywhere, no server to manage.</p></div>
+  <div class="feat"><h3>🧰 JSON or CSV</h3><p>Integrate with your stack — databases, sheets, accounting software, or plain files.</p></div>
+</div>
+
+<section class="pricing" id="pricing">
+  <h2>Simple pricing</h2>
+  <p>Start free. Upgrade when you need volume.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>Free</h3>
+      <div class="price">$0<small>/mo</small></div>
+      <ul>
+        <li>20 extractions / day</li>
+        <li>All document types</li>
+        <li>JSON &amp; CSV output</li>
+        <li>No credit card</li>
+      </ul>
+      <a class="btn secondary" href="#demo">Start building</a>
+    </div>
+    <div class="card pop">
+      <span class="lbl">POPULAR</span>
+      <h3>Pro</h3>
+      <div class="price">$9<small>/mo</small></div>
+      <ul>
+        <li>5,000 extractions / month</li>
+        <li>Priority processing</li>
+        <li>API key + higher rate limits</li>
+        <li>Private endpoint option</li>
+      </ul>
+      <a class="btn" href="mailto:sales@docstruct.dev?subject=Pro%20plan">Get access</a>
+    </div>
+    <div class="card">
+      <h3>Scale</h3>
+      <div class="price">$49<small>/mo</small></div>
+      <ul>
+        <li>50,000 extractions / month</li>
+        <li>Batch processing</li>
+        <li>Priority support</li>
+        <li>Custom schemas</li>
+      </ul>
+      <a class="btn secondary" href="mailto:sales@docstruct.dev?subject=Scale%20plan">Contact</a>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:24px;color:var(--muted)">Payments via a secure checkout (Stripe/LemonSqueezy) — links live once signup opens. <a href="#docs" style="color:var(--accent)" id="docslink">Get an API key early →</a></p>
+</section>
+
+<section class="demo" id="docs" style="max-width:760px">
+  <div class="deco">
+    <div class="deco-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:10px">Quick start</span></div>
+    <div class="deco-body" style="grid-template-columns:1fr">
+      <div class="panel">
+        <h3>One API call</h3>
+        <pre id="quickstart">curl -X POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "Harbor Trading INVOICE #INV-2026-1901 Date: 08/02/2026 ...",
+    "type": "invoice",
+    "output": "json"
+  }'
+
+# → { "ok": true, "data": { "vendor": {...}, "number": "INV-2026-1901", ... } }</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>DocStruct · Built by an indie developer · <a href="https://github.com/marwannaili237/docstruct" style="color:var(--accent)">Open source</a> · <a href="mailto:sales@docstruct.dev" style="color:var(--accent)">Contact</a></p>
+  <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">© 2026 DocStruct. MIT-licensed worker.</p>
+</footer>
+
+<script>
+const API = 'https://docstruct.marwannaili-23-07.workers.dev';
+const $in = document.getElementById('input');
+const $out = document.getElementById('out');
+const $type = document.getElementById('type');
+const $status = document.getElementById('status');
+
+async function run() {
+  const text = $in.value.trim();
+  $status.className = 'status';
+  $status.textContent = 'extracting…';
+  $out.textContent = 'Loading…';
+  try {
+    const r = await fetch(API + '/v1/extract', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, type: $type.value, output: 'json' })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || ('HTTP ' + r.status));
+    $out.textContent = JSON.stringify(d.data, null, 2);
+    $status.className = 'status ok';
+    $status.textContent = '✓ extracted in ' + Math.round(d.meta_ms || 0) + 'ms';
+  } catch (e) {
+    $out.textContent = 'Error: ' + e.message;
+    $status.className = 'status err';
+    $status.textContent = 'failed';
+  }
+}
+document.getElementById('run').addEventListener('click', run);
+document.getElementById('docslink').addEventListener('click', (e)=>{ e.preventDefault(); alert('Checkout opens soon — email sales@docstruct.dev to get priority API key access on the free tier today.'); });
+$in.addEventListener('keydown', (e)=>{ if((e.ctrlKey||e.metaKey)&&e.key==='Enter') run(); });
+</script>
+</body>
+</html>
