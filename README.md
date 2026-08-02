@@ -2,6 +2,10 @@
 
 **AI-powered: turn messy documents (invoices, receipts, bank statements) into clean structured JSON/CSV.**
 
+## 🔴 Try it right now — no account, no signup
+**Free web tool:** paste any invoice/statement/receipt → get clean CSV instantly at **[docstruct.pages.dev](https://docstruct.pages.dev)** (scroll to the live demo).
+Drop-in API → **[Live API playground](https://docstruct.pages.dev/#demo)**
+
 DocStruct is a developer-friendly API that converts raw document text into structured, machine-readable data in seconds. It's built and run on Cloudflare Workers with a near-zero marginal cost (AI inference via partner bridges) — so it's cheap, fast, and scales globally.
 
 ## Why DocStruct?

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Invoice & Statement to CSV Converter — no signup</title>
+<meta name="description" content="Free, no-account online tool: paste an invoice, receipt, or bank statement and get clean CSV/JSON in seconds. Powered by DocStruct's AI extraction. No signup, free, unlimited-ish.">
+<link rel="icon" href="data:,">
+<style>
+  :root{--bg:#0b1120;--card:#111a2e;--ink:#e6edf7;--muted:#8494b0;--accent:#f59e0b;--accent2:#f97316;--good:#4ade80;--bad:#f87171;--border:#1f2a44}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding-bottom:40px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(135deg,#1a1308,#0b1120);border-bottom:1px solid var(--border);padding:30px 20px;text-align:center}
+  header h1{font-size:1.9rem;margin-bottom:8px}
+  header p{color:var(--muted);max-width:620px;margin:0 auto}
+  .tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.3);padding:4px 12px;border-radius:999px;font-size:.8rem;margin-bottom:14px}
+  main{margin-top:24px}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px}
+  .panel h2{font-size:1.05rem;margin-bottom:12px;color:var(--accent)}
+  textarea{width:100%;min-height:200px;background:#0a1120;border:1px solid var(--border);border-radius:10px;color:var(--ink);padding:14px;font-family:ui-monospace,Menlo,monospace;font-size:.84rem;resize:vertical}
+  textarea:focus{outline:none;border-color:var(--accent)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
+  select{background:#0a1120;border:1px solid var(--border);color:var(--ink);padding:10px 12px;border-radius:9px}
+  button{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1a0f00;font-weight:700;padding:11px 22px;border-radius:9px;border:none;cursor:pointer;font-size:.95rem}
+  button.sec{background:transparent;color:var(--accent);border:1px solid var(--border)}
+  .out{background:#0a1120;border:1px solid var(--border);border-radius:10px;padding:14px;min-height:200px;font-family:ui-monospace,Menlo,monospace;font-size:.82rem;white-space:pre-wrap;word-break:break-word;max-height:420px;overflow:auto}
+  .status{font-size:.85rem;color:var(--muted)}
+  .status.good{color:var(--good)}.status.bad{color:var(--bad)}
+  .sample:hover{cursor:pointer;opacity:.85}
+  details{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
+  summary{cursor:pointer;font-weight:600;color:var(--ink)}
+  .step{color:var(--muted);margin:6px 0}
+  footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:30px}
+  .sep{display:flex;gap:8px}
+  .sp-box{display:flex;flex-direction:column;gap:8px;flex:1}
+  code{background:#0a1120;border:1px solid var(--border);padding:2px 6px;border-radius:5px;font-size:.85em}
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">FREE · NO ACCOUNT · NO SIGNUP</span>
+  <h1>Invoice / Statement / Receipt → CSV Converter</h1>
+  <p>Paste any document text. Get clean, structured CSV or JSON back in seconds — ready for Excel, Google Sheets, or your database. Powered by DocStruct AI extraction.</p>
+</header>
+
+<main class="wrap">
+  <div class="panel">
+    <h2>① Paste your document</h2>
+    <textarea id="in" spellcheck="false" placeholder="Paste invoice / bank statement / receipt text here…">Harbor Trading
+INVOICE # INV-2026-1901
+Date: 08/02/2026   Due: 08/16/2026
+Bill To: Northwind LLC
+------------------------------------------------
+1  Widget Assembly (Serial A-4412)      $250.00
+2  Shipping & Handling                  $ 45.00
+------------------------------------------------
+SUBTOTAL   $295.00   TOTAL   $295.00   USD</textarea>
+    <div class="row">
+      <select id="type">
+        <option value="auto">Detect automatically</option>
+        <option value="invoice">Invoice</option>
+        <option value="receipt">Receipt</option>
+        <option value="statement">Bank statement</option>
+        <option value="contract">Contract</option>
+      </select>
+      <button id="go">Convert →</button>
+      <button class="sec" id="csv">Download .csv</button>
+      <button class="sec" id="json">Download .json</button>
+      <span id="st" class="status"></span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>② Structured result</h2>
+    <div id="out" class="out">Paste a document and click Convert →</div>
+  </div>
+
+  <details>
+    <summary>Try a sample (click to load)</summary>
+    <div class="sp-box">
+      <button class="sec sample" data-t="statement">Load a sample bank statement</button>
+      <button class="sec sample" data-t="receipt">Load a sample receipt</button>
+    </div>
+  </details>
+
+  <details open>
+    <summary>How to use with PDFs &amp; as an API</summary>
+    <p class="step">1. <b>From a PDF:</b> copy the text, or use any free PDF-to-text/OCR step first — then paste here. (Automated PDF ingestion is on the roadmap.)</p>
+    <p class="step">2. <b>Need it on your own server/app?</b> Use the API directly. Free tier includes daily usage with no credit card:</p>
+    <pre class="out" style="min-height:0;margin-top:8px">curl -X POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract \
+  -H "Content-Type: application/json" \
+  -d '{"text":"&lt;your document text&gt;","type":"invoice","output":"csv"}'</pre>
+    <p class="step" style="margin-top:10px">Get your free API key + higher limits when paid plans open → enter your email <a href="https://docstruct.pages.dev/#pricing" style="color:var(--accent)">on the main site</a>.</p>
+  </details>
+
+  <footer>Free converter by <a href="https://docstruct.pages.dev" style="color:var(--accent)">DocStruct</a>. No data stored on the server beyond transient processing. · <a href="https://github.com/marwannaili237/docstruct" style="color:var(--accent)">Open source</a></footer>
+</main>
+
+<script>
+const API='https://docstruct.marwannaili-23-07.workers.dev';
+const $in=document.getElementById('in'),$out=document.getElementById('out'),$type=document.getElementById('type'),$st=document.getElementById('st');
+let lastJSON=null;
+let busy=false;
+async function convert(output){
+  if(busy) return; busy=true;
+  const text=$in.value.trim();
+  $st.className='status'; $st.textContent='extracting…'; $out.textContent='Loading…';
+  try{
+    const r=await fetch(API+'/v1/extract',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,type:$type.value,output})});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||('HTTP '+r.status));
+    if(output==='json'){ lastJSON=d.data; $out.textContent=JSON.stringify(d.data,null,2); }
+    else { $out.textContent=d; }
+    $st.className='status good'; $st.textContent='✓ done';
+  }catch(e){ $out.textContent='Error: '+e.message; $st.className='status bad'; $st.textContent='failed'; }
+  busy=false;
+}
+document.getElementById('go').addEventListener('click',()=>convert('json'));
+document.getElementById('csv').addEventListener('click',()=>convert('csv'));
+document.getElementById('json').addEventListener('click',()=>convert('json'));
+const samples={
+ statement:`BlueStar Bank — Statement of Account
+Account Holder: Northwind LLC   Account #: ****9912
+Period: 07/01/2026 - 07/31/2026   Opening: $12,450.00
+07/02/2026  POS PURCHASE AMAZON          $-182.40
+07/05/2026  DIRECT DEPOSIT PAYROLL       $+3,900.00
+07/09/2026  ACH TRANSFER TO VENDOR       $-1,240.00
+07/15/2026  INVOICE PAYMENT #INV-1901    $+295.00
+Closing: $15,222.60`,
+ receipt:`Corner Grocery — RECEIPT #0451
+Date: 08/02/2026  12:47 PM
+Milk (1 gal)        $3.49
+Bread              $2.79
+Eggs (dozen)       $4.99
+Coffee (500g)     $11.20
+SUBTOTAL           $22.47
+TAX (6%)            $1.35
+TOTAL              $23.82
+PAID BY CARD ****4412`};
+document.querySelectorAll('.sample').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.t && samples[b.dataset.t]){ $in.value=samples[b.dataset.t]; $type.value='auto'; convert('json'); }}));
+fetch(API+'/v1/track',{method:'POST'}).catch(()=>{});
+</script>
+</body>
+</html>
