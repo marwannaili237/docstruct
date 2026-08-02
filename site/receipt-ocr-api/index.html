@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Receipt OCR API — Extract Receipt Data to Structured JSON</title>
+<meta name='description' content='Extract merchant, items, prices, and totals from receipts automatically. Receipt OCR API for expense apps, reimbursements, and bookkeeping. Free tier, no credit card.'>
+<link rel='canonical' href='https://docstruct.pages.dev/receipt-ocr-api/'>
+<meta property='og:title' content='Receipt OCR API — Extract Receipt Data to Structured JSON'>
+<meta property='og:description' content='Extract merchant, items, prices, and totals from receipts automatically. Receipt OCR API for expense apps, reimbursements, and bookkeeping. Free tier, no credit card.'>
+<link rel='icon' href='data:,favicon'>
+<link rel='stylesheet' href='/site.css'>
+</head><body>
+<nav><div class='logo'>Doc<span>Struct</span></div><div><a href='https://docstruct.pages.dev/'>Home</a><a href='https://docstruct.pages.dev/#pricing'>Pricing</a><a href='https://docstruct.pages.dev/#docs'>Docs</a><a href='https://github.com/marwannaili237/docstruct'>GitHub</a></div></nav>
+<section class='seo-hero'><h1>Receipt OCR: turn receipts into clean line-item JSON</h1>
+<p>Extract merchant, items, prices, and totals from receipts automatically. Receipt OCR API for expense apps, reimbursements, and bookkeeping. Free tier, no credit card.</p><a class='btn' href='https://docstruct.pages.dev/#demo'>Try live demo</a> <a class='btn secondary' href='https://docstruct.pages.dev/#docs'>View docs</a></section>
+<section class='seo-sec'><h2>Why you need receipt OCR as an API</h2><p>Expense tracking apps, reimbursement tools, and bookkeepers process hundreds of receipts a month. Manually keying merchant, item, tax, and total fields is the single biggest bottleneck. A receipt OCR API reads the receipt text and outputs structured JSON: merchant, date, currency, line items with quantity and price, subtotal, tax, and total.</p></section>
+<section class='seo-sec'><h2>Works with messy, real-world receipts</h2><p>Receipts are the messiest documents out there — inconsistent layouts, no standardized fields, handwritten adjustments. DocStruct is tuned to extract the fields that matter from noisy text so your expense records are consistent and ready for export to CSV or your accounting system.</p></section>
+<section class='seo-sec'><h2>Sample response</h2><pre class='code'>{
+  &quot;ok&quot;: true,
+  &quot;data&quot;: { ... }
+}</pre></section>
+<section class='seo-sec'><h2>Start free</h2><p>Up to 20 receipts a day free. Send text + type &quot;receipt&quot;. Get JSON or CSV back in seconds and connect the pipeline to your expense workflow.</p></section>
+<section class='seo-sec'><h2>Quick start</h2><pre class='code'><code>POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract
+Content-Type: application/json
+
+{&quot;text&quot;: &quot;&lt;paste invoice/statement/receipt/contract text&gt;&quot;, &quot;type&quot;: &quot;receipt&quot;, &quot;output&quot;: &quot;json&quot;}
+→ {&quot;ok&quot;: true, &quot;data&quot;: { ... structured fields ... }}</code></pre></section>
+<script>(function(){try{var src=new URLSearchParams(location.search).get('ref')||document.referrer||'direct';fetch('https://devportal.marwannaili-23-07.workers.dev/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'pageview',page:'seo/receipt-ocr-api',src})}).catch(function(){});}catch(e){}})();</script>
+</body></html>

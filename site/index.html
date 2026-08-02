@@ -248,6 +248,11 @@ document.getElementById('wlbtn').addEventListener('click', async ()=>{
 });
 // lightweight pageview tracking (self-hosted)
 try{ fetch(API + '/v1/track', {method:'POST'}); }catch(e){}
+// acquisition attribution to DevPortal analytics
+try{ const src=(new URLSearchParams(location.search).get('ref'))||document.referrer||'direct';
+  fetch('https://devportal.marwannaili-23-07.workers.dev/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'pageview',page:'landing',src})}).catch(()=>{}); }catch(e){}
+// track demo conversions
+document.getElementById('run').addEventListener('dblclick', ()=>{ try{ fetch('https://devportal.marwannaili-23-07.workers.dev/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'demo_used',page:'landing'})}).catch(()=>{}); }catch(e){} });
 
 $in.addEventListener('keydown', (e)=>{ if((e.ctrlKey||e.metaKey)&&e.key==='Enter') run(); });
 </script>

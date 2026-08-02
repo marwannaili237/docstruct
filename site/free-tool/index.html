@@ -140,6 +140,9 @@ TOTAL              $23.82
 PAID BY CARD ****4412`};
 document.querySelectorAll('.sample').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.t && samples[b.dataset.t]){ $in.value=samples[b.dataset.t]; $type.value='auto'; convert('json'); }}));
 fetch(API+'/v1/track',{method:'POST'}).catch(()=>{});
+// Also send acquisition to DevPortal analytics (source + page attribution)
+try{ const src=(new URLSearchParams(location.search).get('ref'))||document.referrer||'direct';
+  fetch('https://devportal.marwannaili-23-07.workers.dev/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'pageview',page:'free-tool',src})}).catch(()=>{}); }catch(e){}
 </script>
 </body>
 </html>
