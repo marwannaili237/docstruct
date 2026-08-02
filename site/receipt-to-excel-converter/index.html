@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Receipt to Excel / CSV — Expense Tracking Automation</title>
+<meta name='description' content='Turn expense receipts into spreadsheet rows (merchant, date, amount, items, tax) for expense reports and bookkeeping. Free receipt converter + API.'>
+<link rel='canonical' href='https://docstruct.pages.dev/receipt-to-excel-converter/'>
+<meta property='og:title' content='Receipt to Excel / CSV — Expense Tracking Automation'>
+<meta property='og:description' content='Turn expense receipts into spreadsheet rows (merchant, date, amount, items, tax) for expense reports and bookkeeping. Free receipt converter + API.'>
+<link rel='icon' href='data:,favicon'>
+<link rel='stylesheet' href='/site.css'>
+</head><body>
+<nav><div class='logo'>Doc<span>Struct</span></div><div><a href='https://docstruct.pages.dev/'>Home</a><a href='https://docstruct.pages.dev/#pricing'>Pricing</a><a href='https://docstruct.pages.dev/#docs'>Docs</a><a href='https://github.com/marwannaili237/docstruct'>GitHub</a></div></nav>
+<section class='seo-hero'><h1>Extract receipt data to Excel/CSV automatically, free</h1>
+<p>Turn expense receipts into spreadsheet rows (merchant, date, amount, items, tax) for expense reports and bookkeeping. Free receipt converter + API.</p><a class='btn' href='https://docstruct.pages.dev/#demo'>Try live demo</a> <a class='btn secondary' href='https://docstruct.pages.dev/#docs'>View docs</a></section>
+<section class='seo-sec'><h2>Receipts are everywhere, and messy</h2><p>Freelancers, sales teams, and small-business owners collect dozens of receipts a month and need them in expense reports or spreadsheets. That means opening each one and typing out the merchant, date, and amount. DocStruct&#x27;s receipt extraction reads the receipt text and returns structured JSON/CSV — each line item, the subtotal, tax, and total.</p></section>
+<section class='seo-sec'><h2>How it works</h2><p>Paste receipt text (or its PDF-extracted text) into the free converter, or call the API with type &quot;receipt&quot;. You get back the receipt details as clean rows ready for Excel or an expense tool.</p></section>
+<section class='seo-sec'><h2>Sample output</h2><pre class='code'>{
+  &quot;ok&quot;: true,
+  &quot;data&quot;: { ... }
+}</pre></section>
+<section class='seo-sec'><h2>Free to start</h2><p>Convert up to 20 receipts a day free, no account, no card. Automate heavier volume with the API plan.</p></section>
+<section class='seo-sec'><h2>Quick start</h2><pre class='code'><code>POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract
+Content-Type: application/json
+
+{&quot;text&quot;: &quot;&lt;paste invoice/statement/receipt/contract text&gt;&quot;, &quot;type&quot;: &quot;receipt&quot;, &quot;output&quot;: &quot;json&quot;}
+→ {&quot;ok&quot;: true, &quot;data&quot;: { ... structured fields ... }}</code></pre></section>
+<script>(function(){try{var src=new URLSearchParams(location.search).get('ref')||document.referrer||'direct';fetch('https://devportal.marwannaili-23-07.workers.dev/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'pageview',page:'seo/receipt-to-excel-converter',src})}).catch(function(){});}catch(e){}})();</script>
+</body></html>

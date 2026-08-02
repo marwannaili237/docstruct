@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>PDF to Structured Data API — Parse PDFs into JSON/CSV</title>
+<meta name='description' content='Parse PDF invoices, receipts, and statements into structured JSON/CSV automatically. Pass the extracted text to DocStruct — free tier, developer-first, no credit card.'>
+<link rel='canonical' href='https://docstruct.pages.dev/pdf-to-structured-data-api/'>
+<meta property='og:title' content='PDF to Structured Data API — Parse PDFs into JSON/CSV'>
+<meta property='og:description' content='Parse PDF invoices, receipts, and statements into structured JSON/CSV automatically. Pass the extracted text to DocStruct — free tier, developer-first, no credit card.'>
+<link rel='icon' href='data:,favicon'>
+<link rel='stylesheet' href='/site.css'>
+</head><body>
+<nav><div class='logo'>Doc<span>Struct</span></div><div><a href='https://docstruct.pages.dev/'>Home</a><a href='https://docstruct.pages.dev/#pricing'>Pricing</a><a href='https://docstruct.pages.dev/#docs'>Docs</a><a href='https://github.com/marwannaili237/docstruct'>GitHub</a></div></nav>
+<section class='seo-hero'><h1>Turn PDF documents into clean JSON/CSV with an API</h1>
+<p>Parse PDF invoices, receipts, and statements into structured JSON/CSV automatically. Pass the extracted text to DocStruct — free tier, developer-first, no credit card.</p><a class='btn' href='https://docstruct.pages.dev/#demo'>Try live demo</a> <a class='btn secondary' href='https://docstruct.pages.dev/#docs'>View docs</a></section>
+<section class='seo-sec'><h2>PDFs hide your data</h2><p>Invoices, receipts, and statements arrive as PDFs, and getting the data out means either manual retyping or expensive OCR. DocStruct takes the PDF&#x27;s text (however you extract it — many tools and libraries do that part) and turns it into structured JSON or CSV: line items, totals, dates, vendor, and more.</p></section>
+<section class='seo-sec'><h2>Parse-then-extract is the winning combo</h2><p>Use your existing PDF-to-text step, then call DocStruct to understand the content. It handles invoices, receipts, bank statements, and contracts automatically (type &quot;auto&quot; detects the kind) and returns clean, consistent fields.</p></section>
+<section class='seo-sec'><h2>Sample output</h2><pre class='code'>{
+  &quot;ok&quot;: true,
+  &quot;data&quot;: { ... }
+}</pre></section>
+<section class='seo-sec'><h2>Developer-first, free to start</h2><p>One POST request to /v1/extract. CORS-enabled, JSON or CSV, 20 free calls a day. Pay-as-you-grow plans for production volume.</p></section>
+<section class='seo-sec'><h2>Quick start</h2><pre class='code'><code>POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract
+Content-Type: application/json
+
+{&quot;text&quot;: &quot;&lt;paste invoice/statement/receipt/contract text&gt;&quot;, &quot;type&quot;: &quot;auto&quot;, &quot;output&quot;: &quot;json&quot;}
+→ {&quot;ok&quot;: true, &quot;data&quot;: { ... structured fields ... }}</code></pre></section>
+<script>(function(){try{var src=new URLSearchParams(location.search).get('ref')||document.referrer||'direct';fetch('https://devportal.marwannaili-23-07.workers.dev/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'pageview',page:'seo/pdf-to-structured-data-api',src})}).catch(function(){});}catch(e){}})();</script>
+</body></html>

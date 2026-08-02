@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Invoice to CSV Converter — Free Online Tool &amp; API</title>
+<meta name='description' content='Turn messy invoice text into a clean CSV you can import to Excel, Google Sheets, or your accounting software. Free online converter + developer API. No credit card, no signup.'>
+<link rel='canonical' href='https://docstruct.pages.dev/invoice-to-csv-converter/'>
+<meta property='og:title' content='Invoice to CSV Converter — Free Online Tool &amp; API'>
+<meta property='og:description' content='Turn messy invoice text into a clean CSV you can import to Excel, Google Sheets, or your accounting software. Free online converter + developer API. No credit card, no signup.'>
+<link rel='icon' href='data:,favicon'>
+<link rel='stylesheet' href='/site.css'>
+</head><body>
+<nav><div class='logo'>Doc<span>Struct</span></div><div><a href='https://docstruct.pages.dev/'>Home</a><a href='https://docstruct.pages.dev/#pricing'>Pricing</a><a href='https://docstruct.pages.dev/#docs'>Docs</a><a href='https://github.com/marwannaili237/docstruct'>GitHub</a></div></nav>
+<section class='seo-hero'><h1>Convert invoice PDF text to CSV instantly (free, no signup)</h1>
+<p>Turn messy invoice text into a clean CSV you can import to Excel, Google Sheets, or your accounting software. Free online converter + developer API. No credit card, no signup.</p><a class='btn' href='https://docstruct.pages.dev/#demo'>Try live demo</a> <a class='btn secondary' href='https://docstruct.pages.dev/#docs'>View docs</a></section>
+<section class='seo-sec'><h2>The fastest way to invoice to CSV</h2><p>Copy-paste an invoice (or paste the text pulled from its PDF) and get a clean, machine-readable CSV in seconds — no manual retyping, no spreadsheet fiddling. Perfect for importing supplier invoices into Excel, Google Sheets, QuickBooks, or a database. Works for any currency and any layout because it&#x27;s AI-powered, not template-based.</p></section>
+<section class='seo-sec'><h2>Free online tool + API</h2><p>Use the free web converter on this page, or hit the same engine via the API when you need to automate it. The /v1/extract endpoint returns the invoice fields as JSON or CSV, so you can build an automated pipeline for every invoice you receive.</p></section>
+<section class='seo-sec'><h2>Sample output</h2><pre class='code'>{
+  &quot;ok&quot;: true,
+  &quot;data&quot;: { ... }
+}</pre></section>
+<section class='seo-sec'><h2>No signup, no credit card</h2><p>The free tier handles 20 conversions a day per IP, no account needed. Go over that? The API plan gives you 30k calls a month. Start free and scale as your volume grows.</p></section>
+<section class='seo-sec'><h2>Quick start</h2><pre class='code'><code>POST https://docstruct.marwannaili-23-07.workers.dev/v1/extract
+Content-Type: application/json
+
+{&quot;text&quot;: &quot;&lt;paste invoice/statement/receipt/contract text&gt;&quot;, &quot;type&quot;: &quot;invoice&quot;, &quot;output&quot;: &quot;json&quot;}
+→ {&quot;ok&quot;: true, &quot;data&quot;: { ... structured fields ... }}</code></pre></section>
+<script>(function(){try{var src=new URLSearchParams(location.search).get('ref')||document.referrer||'direct';fetch('https://devportal.marwannaili-23-07.workers.dev/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'pageview',page:'seo/invoice-to-csv-converter',src})}).catch(function(){});}catch(e){}})();</script>
+</body></html>
