@@ -1,0 +1,23 @@
+name = "docstruct"
+main = "src/worker.js"
+compatibility_date = "2025-06-01"
+
+workers_dev = true
+
+[[services]]
+binding = "KIMI_BRIDGE"
+service = "kimi-web-bridge"
+environment = "production"
+
+[[services]]
+binding = "GEMINI_BRIDGE"
+service = "gemini-web-bridge"
+environment = "production"
+
+[[kv_namespaces]]
+binding = "USAGE"
+id = "761ca585dc2147ea9b2a2030423578b2"
+
+[vars]
+AI_MODEL = "kimi-k2"
+FREE_DAILY_LIMIT = 20
