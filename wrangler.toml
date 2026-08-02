@@ -22,6 +22,10 @@ id = "761ca585dc2147ea9b2a2030423578b2"
 binding = "WAITLIST"
 id = "51b5997b2cc74038bdf98c75e5b1061e"
 
+[[kv_namespaces]]
+binding = "KEYS"
+id = "48244e4ef6964568a1bf2bcce7048923"
+
 [vars]
 AI_MODEL = "kimi-k2"
 FREE_DAILY_LIMIT = 20

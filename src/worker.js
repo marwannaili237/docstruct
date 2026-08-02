@@ -140,7 +140,23 @@ export default {
     }
 
     // Extract
-    if (method === 'POST' && url.pathname === '/v1/extract') {      const apiKey = request.headers.get('X-API-Key') || request.headers.get('Authorization');
+    if (method === 'POST' && url.pathname === '/v1/extract') {
+      const apiKeyHeader = request.headers.get('X-API-Key') || request.headers.get('Authorization');
+      let apiKey = apiKeyHeader || '';
+      let keyPlan = null;
+      if (apiKey) {
+        // strip possible 'Bearer ' prefix
+        apiKey = apiKey.replace(/^Bearer\s+/i, '').trim();
+        // Validate against DevPortal KEYS namespace
+        if (env.KEYS) {
+          const kv = await env.KEYS.get(apiKey, 'json');
+          if (kv) {
+            keyPlan = kv; // { plan, month_start, monthly, used, created }
+          } else {
+            return err('Invalid API key', 401);
+          }
+        }
+      }
       let body;
       try { body = await request.json(); } catch { return err('Invalid JSON body', 400); }
 
@@ -153,8 +169,20 @@ export default {
       const output = (body.output || 'json').toString().toLowerCase();
       if (!['json', 'csv'].includes(output)) return err('output must be json or csv', 400);
 
-      // Free-tier rate limit via IP (only when no API key)
-      if (!apiKey) {
+      // Enforce quota for paid key
+      if (keyPlan) {
+        if (keyPlan.used >= keyPlan.monthly) {
+          return err('Monthly quota exceeded (' + keyPlan.used + '/' + keyPlan.monthly + ').', 429);
+        }
+        keyPlan.used += 1;
+        // reset month if a new month started
+        const now = Date.now();
+        if (now - keyPlan.month_start > 30 * 86400 * 1000) {
+          keyPlan.month_start = now; keyPlan.used = 1;
+        }
+        await env.KEYS.put(apiKey, JSON.stringify(keyPlan));
+      } else {
+        // Free-tier rate limit via IP (only when no API key)
         const ip = request.headers.get('CF-Connecting-IP') || 'anon';
         const hit = await getUsage('ip:' + ip, env);
         const count = (hit?.count || 0);
@@ -173,7 +201,7 @@ export default {
             headers: { 'Content-Type': 'text/csv', 'Content-Disposition': 'attachment; filename="docstruct.csv"', ...cors() },
           });
         }
-        return json({ ok: true, usage: 'free', data: result });
+        return json({ ok: true, usage: keyPlan ? { plan: keyPlan.plan, used: keyPlan.used, monthly: keyPlan.monthly } : 'free', data: result });
       } catch (ex) {
         return err('Extraction failed: ' + ex.message, 502);
       }
