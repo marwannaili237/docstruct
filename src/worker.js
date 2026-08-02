@@ -114,9 +114,33 @@ export default {
       return json({ models: [env.AI_MODEL || 'kimi-k2'], default: env.AI_MODEL || 'kimi-k2' });
     }
 
+    // Waitlist / early access signup
+    if (method === 'POST' && url.pathname === '/v1/waitlist') {
+      let body;
+      try { body = await request.json(); } catch { return err('Invalid JSON body', 400); }
+      const email = (body.email || '').toString().trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err('Invalid email', 400);
+      const at = new Date().toISOString();
+      const key = 'wl:' + email;
+      const existing = await env.WAITLIST.get(key);
+      if (!existing) {
+        await env.WAITLIST.put(key, JSON.stringify({ email, at, source: 'landing' }));
+      }
+      return json({ ok: true, message: 'You are on the early-access list. We will email you when paid plans open.' });
+    }
+
+    // Pageview counter (lightweight self-hosted analytics)
+    if (method === 'POST' && url.pathname === '/v1/track') {
+      const ip = request.headers.get('CF-Connecting-IP') || 'anon';
+      const today = new Date().toISOString().slice(0, 10);
+      const pk = 'pv:' + today;
+      const cur = await env.WAITLIST.get(pk);
+      await env.WAITLIST.put(pk, JSON.stringify({ pv: (cur ? JSON.parse(cur).pv : 0) + 1 }));
+      return json({ ok: true });
+    }
+
     // Extract
-    if (method === 'POST' && url.pathname === '/v1/extract') {
-      const apiKey = request.headers.get('X-API-Key') || request.headers.get('Authorization');
+    if (method === 'POST' && url.pathname === '/v1/extract') {      const apiKey = request.headers.get('X-API-Key') || request.headers.get('Authorization');
       let body;
       try { body = await request.json(); } catch { return err('Invalid JSON body', 400); }
 
